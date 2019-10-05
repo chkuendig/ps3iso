@@ -1,0 +1,20 @@
+Package: python3-ps3iso
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends}
+Build-Depends: debhelper (>= 11~), dh-python, python3-all, python3-setuptools, python-docutils, python-sphinx
+Suggests: python-ps3iso-doc
+Description: Playstation 3 image manager and PARAM.SFO reader (Python 3)
+ This package contains the ps3iso tool and associated Python library 
+ for managing existing Playstation 3 image files
+ .
+ This package installs the library for Python 3.
+
+Package: python-ps3iso-doc
+Architecture: all
+Section: doc
+Depends: ${sphinxdoc:Depends}, ${misc:Depends}
+Description: Playstation 3 image manager and PARAM.SFO reader (documentation)
+ This package contains the ps3iso tool and associated Python library 
+ for managing existing Playstation 3 image files
+ .
+ This is the ps3iso documentation package.
