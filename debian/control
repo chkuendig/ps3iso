@@ -1,21 +1,37 @@
+Source: ps3iso
+Section: python
+Priority: optional
+Maintainer: Joshua Stover <jmstover6@gmail.com>
+Build-Depends:
+    debhelper (>=11~),
+    dh-python,
+    python3-all,
+    python3-setuptools, 
+    python3-sphinxcontrib.apidoc,
+    python3-sphinxcontrib.autoprogram
+Vcs-Git: https://git.sr.ht/~jmstover/ps3iso
+Vcs-Browser: https://git.sr.ht/~jmstover/ps3iso/tree
+
+
 Package: python3-ps3iso
 Architecture: all
+Multi-Arch: foreign
 Depends: ${python3:Depends}, ${misc:Depends}, genisoimage
-Build-Depends: debhelper (>= 11~), dh-python, python3-all, python3-setuptools, python-docutils, python-sphinx
-X-Python3-Version: >= 3.6
 Suggests: python-ps3iso-doc
 Description: Playstation 3 image manager and PARAM.SFO reader (Python 3)
  This package contains the ps3iso tool and associated Python library 
  for managing existing Playstation 3 image files
  .
- This package installs the library for Python 3.
+ This is the application and Python 3 library package
 
-Package: python-ps3iso-doc
-Architecture: all
+Package: python3-ps3iso-doc
 Section: doc
+Architecture: all
+Multi-Arch: foreign
 Depends: ${sphinxdoc:Depends}, ${misc:Depends}
+Recommends: python3-ps3iso
 Description: Playstation 3 image manager and PARAM.SFO reader (documentation)
  This package contains the ps3iso tool and associated Python library 
- for managing existing Playstation 3 image files
+ for managing existing Playstation 3 image files.
  .
- This is the ps3iso documentation package.
+ This is the documentation package.
