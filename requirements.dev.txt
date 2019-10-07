@@ -4,11 +4,8 @@ fastentrypoints
 pytest
 setuptools
 sphinx
-sphinx-autodoc-typehints
-sphinx-git
 sphinx-sitemap
 sphinxcontrib-apidoc
 sphinxcontrib-autoprogram
-sphinxcontrib-fulltoc
 vulture
 wheel

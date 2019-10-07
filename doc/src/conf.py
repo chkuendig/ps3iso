@@ -24,9 +24,6 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinxcontrib.apidoc',
     'sphinxcontrib.autoprogram',
-    'sphinxcontrib.fulltoc',
-    'sphinx_autodoc_typehints',
-    'sphinx_git',
     'generate_history',
 ]
 
