@@ -6,7 +6,7 @@ export PYBUILD_NAME = ps3iso
 %:
 	export DH_VERBOSE=$(DH_VERBOSE)
 	export PYBUILD_TEST_PYTEST=$(PYBUILD_TEST_PYTEST)
-	dh $@ --with python3,sphinxdoc--buildsystem=pybuild
+	dh $@ --with python3,sphinxdoc --buildsystem=pybuild
 
 override_dh_auto_test:
 	dh_auto_test -- --test-pytest
@@ -19,5 +19,6 @@ override_dh_auto_build:
 	export http_proxy=127.0.0.1:9
 	export https_proxy=127.0.0.1:9
 	dh_auto_build
-	PYTHONPATH=. python3 -m sphinx -N -bhtml docs/ build/html # HTML generator
-	PYTHONPATH=. python3 -m sphinx -N -bman docs/ build/man # Manpage generator
+	make doc
+	#PYTHONPATH=. python3 -m sphinx -N -bhtml docs/ build/html # HTML generator
+	#PYTHONPATH=. python3 -m sphinx -N -bman docs/ build/man # Manpage generator

@@ -8,7 +8,7 @@ Build-Depends:
     python3-all,
     python3-setuptools, 
     python3-sphinxcontrib.apidoc,
-    python3-sphinxcontrib.autoprogram
+    python3-sphinxcontrib.autoprogram,
     python3-pytest
 Vcs-Git: https://git.sr.ht/~jmstover/ps3iso
 Vcs-Browser: https://git.sr.ht/~jmstover/ps3iso/tree
