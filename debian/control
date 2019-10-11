@@ -3,15 +3,17 @@ Section: python
 Priority: optional
 Maintainer: Joshua Stover <jmstover6@gmail.com>
 Build-Depends:
-    debhelper (>=11~),
+    debhelper (>=12~),
     dh-python,
     python3-all,
-    python3-setuptools, 
+    python3-setuptools,
+    python3-sphinx,
     python3-sphinxcontrib.apidoc,
     python3-sphinxcontrib.autoprogram,
     python3-pytest
 Vcs-Git: https://git.sr.ht/~jmstover/ps3iso
 Vcs-Browser: https://git.sr.ht/~jmstover/ps3iso/tree
+Standards-Version: 4.4.1
 
 
 Package: python3-ps3iso

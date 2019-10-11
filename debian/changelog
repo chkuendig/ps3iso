@@ -1,5 +1,5 @@
-ps3iso (0.3.4) UNRELEASED; urgency=low
+ps3iso (0.3.4-1) UNRELEASED; urgency=low
 
-  * Initial Debian release.
+  * Initial Debian release. (Closes: #)
 
  -- Joshua Stover <jmstover6@gmail.com>  Thu, 10 Oct 2019 21:19:05 +1100

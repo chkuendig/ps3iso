@@ -11,14 +11,8 @@ export PYBUILD_NAME = ps3iso
 override_dh_auto_test:
 	dh_auto_test -- --test-pytest
 
-override_dh_auto_clean:
-	python3 setup.py clean -a
-	find . -name '*.pyc' -delete
-
 override_dh_auto_build:
 	export http_proxy=127.0.0.1:9
 	export https_proxy=127.0.0.1:9
 	dh_auto_build
 	make doc
-	#PYTHONPATH=. python3 -m sphinx -N -bhtml docs/ build/html # HTML generator
-	#PYTHONPATH=. python3 -m sphinx -N -bman docs/ build/man # Manpage generator
