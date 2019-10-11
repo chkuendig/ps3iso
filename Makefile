@@ -46,12 +46,11 @@ COVERAGE_FILE   := .coverage
 COVERAGE_HTML   := $(ARTIFACTS_DIR)htmlcov/
 
 # Source Packages
-SDIST_NAME 			:= $(MODULE_MAIN)-$(MODULE_VERSION).tar.gz
-PYPI_SDIST      	:= dist/$(SDIST_NAME)
-DEBIAN_SDIST		:= ../$(SDIST_NAME)
+PYPI_SDIST      	:= dist/$(MODULE_MAIN)-$(MODULE_VERSION).tar.gz
+DEBIAN_SDIST		:= ../$(MODULE_MAIN)_$(MODULE_VERSION).orig.tar.gz
 
 # Build FIles
-_BUILD_DIRS  		:= build dist *.egg-info .pytest_cache $(ARTIFACTS_DIR) $(DOC_BUILD_DIR)
+_BUILD_DIRS  		:= build dist *.egg-info .pytest_cache .pybuild $(ARTIFACTS_DIR) $(DOC_BUILD_DIR)
 BUILD_DIRS  		:= $(strip $(foreach d,$(_BUILD_DIRS),$(wildcard $(d))))
 BUILD_DIRS 			+= $(foreach d,. * */* */*/* */*/*/*,$(wildcard $(d)/__pycache__))
 DOC_BUILD_FILES 	:= $(call rwildcard,$(DOC_APIDOC_DIR),*)
@@ -138,6 +137,18 @@ $(ARTIFACTS_DIR):
 	[ -d "$(ARTIFACTS_DIR)" ] || mkdir -p "$(ARTIFACTS_DIR)"
 
 
+# Debian Package
+#------------------------------------------------------------------------------
+deb: $(SOURCE_FILES) $(DEBIAN_SDIST)
+	debuild -us -uc
+	debuild -- clean
+
+$(DEBIAN_SDIST): $(SOURCE_FILES) | clean
+	[ ! -f "$(DEBIAN_SDIST)" ] || rm "$(DEBIAN_SDIST)"
+	tar cvzf $(DEBIAN_SDIST) --exclude-vcs --exclude=. --exclude=.. .* *
+
+
+
 # Targets which fail if the executable is not available
 #------------------------------------------------------------------------------
 _anybadge:
@@ -155,5 +166,5 @@ ifeq ($(SPHINX_BUILD),)
 	$(error sphinx-build executable not found in PATH. Unable to build documentation.) 
 endif
 
-.PHONY: default all clean test doc coverage coverage-html pypi pypi-upload artifacts badges _anybage _coverage _sphinx_build
+.PHONY: default all clean test doc coverage coverage-html pypi pypi-upload deb artifacts badges _anybage _coverage _sphinx_build
 
