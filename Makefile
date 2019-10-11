@@ -48,12 +48,14 @@ COVERAGE_HTML   := $(ARTIFACTS_DIR)htmlcov/
 # Source Packages
 PYPI_SDIST      	:= dist/$(MODULE_MAIN)-$(MODULE_VERSION).tar.gz
 DEBIAN_SDIST		:= ../$(MODULE_MAIN)_$(MODULE_VERSION).orig.tar.gz
+DEBIAN_DEB_NAMES	:= python3-$(MODULE_MAIN) python3-$(MODULE_MAIN)-doc
 
 # Build FIles
 _BUILD_DIRS  		:= build dist *.egg-info .pytest_cache .pybuild $(ARTIFACTS_DIR) $(DOC_BUILD_DIR)
 BUILD_DIRS  		:= $(strip $(foreach d,$(_BUILD_DIRS),$(wildcard $(d))))
 BUILD_DIRS 			+= $(foreach d,. * */* */*/* */*/*/*,$(wildcard $(d)/__pycache__))
 DOC_BUILD_FILES 	:= $(call rwildcard,$(DOC_APIDOC_DIR),*)
+DEB_BUILD_FILES		:= $(foreach ext,build buildinfo dsc changes debian.tar.xz, ../$(MODULE_MAIN)_$(MODULE_VERSION)*.$(ext)) $(foreach deb,$(DEBIAN_DEB_NAMES),../$(deb)_$(MODULE_VERSION)*.deb)
 
 # Source Files
 SOURCE_FILES 		:= $(call rwildcard,.,*.py)
@@ -142,6 +144,9 @@ $(ARTIFACTS_DIR):
 deb: $(SOURCE_FILES) $(DEBIAN_SDIST)
 	debuild -us -uc
 	debuild -- clean
+	[ -d build ] || mkdir build
+	mv -v $(DEBIAN_SDIST) $(DEB_BUILD_FILES) build/
+
 
 $(DEBIAN_SDIST): $(SOURCE_FILES) | clean
 	[ ! -f "$(DEBIAN_SDIST)" ] || rm "$(DEBIAN_SDIST)"
