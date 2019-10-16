@@ -16,6 +16,12 @@ else ifneq ($(call findpath,python3-coverage),)
 COVERAGE ?= python3-coverage
 endif
 
+ifneq ($(call findpath,gnutar),)
+TAR := gnutar
+else
+TAR := tar
+endif
+
 ANYBADGE ?= $(call findpath,anybadge)
 
 # recursive wilcard (https://stackoverflow.com/a/18258352)
@@ -150,7 +156,7 @@ deb: $(SOURCE_FILES) $(DEBIAN_SDIST)
 
 $(DEBIAN_SDIST): $(SOURCE_FILES) | clean
 	[ ! -f "$(DEBIAN_SDIST)" ] || rm "$(DEBIAN_SDIST)"
-	tar cvzf $(DEBIAN_SDIST) --exclude-vcs --exclude=. --exclude=.. .* *
+	$(TAR) cvzf $(DEBIAN_SDIST) --exclude-vcs --exclude=venv --exclude=.idea --exclude=. --exclude=.. .* *
 
 
 
